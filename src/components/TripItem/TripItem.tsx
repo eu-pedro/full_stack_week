@@ -1,5 +1,6 @@
 import { Trip } from "@prisma/client";
 import Image from "next/image";
+import Link from "next/link";
 import ReactCountryFlag from "react-country-flag";
 
 interface TripItemProps {
@@ -8,7 +9,8 @@ interface TripItemProps {
 
 export function TripItem ({trip}: TripItemProps) {
   return (
-    <div className="flex flex-col">
+    <Link href={`/trips/${trip.id}`}>
+      <div className="flex flex-col">
       <div className="relative h-[280px] w-[280px]">
         <Image 
           src={trip.coverImage} 
@@ -27,5 +29,6 @@ export function TripItem ({trip}: TripItemProps) {
 
       <p className="text-xs text-grayPrimary"><span className="text-primary font-medium">R${trip.pricePerDay.toString()}</span> por dia</p>
     </div>
+    </Link>
   )
 }
