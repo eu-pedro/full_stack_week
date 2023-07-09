@@ -1,5 +1,5 @@
 import { Metadata } from "next"
-import {Trips} from "./components/Trips"
+// import {Trips} from "./components/Trips"
 
 export const metadata: Metadata = {
   title: 'about',
@@ -7,9 +7,5 @@ export const metadata: Metadata = {
 }
 
 export default function About() {
-  return (
-    <h1>
-      <Trips />
-    </h1>
-  )
+  return
 }
