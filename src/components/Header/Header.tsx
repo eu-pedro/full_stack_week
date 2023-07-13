@@ -43,7 +43,7 @@ export function Header() {
           <AiOutlineMenu size={16} onClick={handleMenuClick} className="cursor-pointer"/>
           <Image height={32} width={32} alt={data.user.name!} src={data.user.image!} className="rounded-full shadow-md"/>
           {menuIsOpen && (
-            <div className="absolute top-12 left-0 w-full h-full bg-white rounded-lg shadow-md flex flex-col justify-center items-center transition-all">
+            <div className="absolute top-12 left-0 w-full h-full bg-white rounded-lg shadow-md flex flex-col justify-center items-center transition-all z-50">
               <button 
                 className="text-primary text-sm font-semibold transition-all" 
                 onClick={handleLogoutClick}>
