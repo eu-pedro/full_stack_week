@@ -33,6 +33,7 @@ export default async function TripDetails ({ params }: { params: { tripId: strin
         maxGuests={trip.maxGuests} 
         tripStartDate={trip.startDate} 
         tripEndDate={trip.endDate}
+        pricePerDay={trip.pricePerDay as any}
       />
 
       {/* Descrição da viagem */}
