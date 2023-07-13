@@ -6,7 +6,9 @@ import { Trip } from "@prisma/client";
 import { Controller, useForm } from "react-hook-form";
 
 interface TripReservationProps {
-  trip: Trip
+  tripStartDate: Date
+  tripEndDate: Date
+  maxGuests: number
 }
 
 interface TripReservationForm {
@@ -15,13 +17,15 @@ interface TripReservationForm {
   endDate: Date | null
 }
 
-export function TripReservation({ trip }: TripReservationProps) {
+export function TripReservation({ maxGuests, tripStartDate, tripEndDate }: TripReservationProps) {
 
-  const { handleSubmit ,register, formState: { errors }, control } = useForm<TripReservationForm>()
+  const { handleSubmit ,register, formState: { errors }, control, watch } = useForm<TripReservationForm>()
   
-  const onSubmit = (data) => {
+  const onSubmit = (data: any) => {
     console.log({ data })
   }
+
+  const startDate = watch('startDate')
 
   return (
     <div>
@@ -45,6 +49,7 @@ export function TripReservation({ trip }: TripReservationProps) {
               onChange={field.onChange} 
               selected={field.value}
               className="w-full"
+              minDate={tripStartDate}
             />
             )}
           />
@@ -67,6 +72,8 @@ export function TripReservation({ trip }: TripReservationProps) {
               onChange={field.onChange} 
               selected={field.value}
               className="w-full"
+              maxDate={tripEndDate}
+              minDate={startDate ?? tripStartDate}
             />
             )}
           />
@@ -81,7 +88,7 @@ export function TripReservation({ trip }: TripReservationProps) {
           })}
           error={!!errors.guests}
           errorMessage={errors?.guests?.message}
-          placeholder={`Número de hóspedes (máx: ${trip.maxGuests})`} 
+          placeholder={`Número de hóspedes (máx: ${maxGuests})`} 
           className="mt-4" 
         />
 
