@@ -49,7 +49,7 @@ export function TripReservation({ maxGuests, tripStartDate, tripEndDate, pricePe
         message: 'Essa data já está reservada'
       })
 
-      setError('endDate', {
+      return setError('endDate', {
         type: 'manual',
         message: 'Essa data já está reservada'
       })
@@ -63,7 +63,7 @@ export function TripReservation({ maxGuests, tripStartDate, tripEndDate, pricePe
     }
 
     if(res?.error?.code === 'INVALID_END_DATE'){
-      setError('startDate', {
+      return setError('startDate', {
         type: 'manual',
         message: 'Data inválida'
       })
@@ -131,12 +131,17 @@ export function TripReservation({ maxGuests, tripStartDate, tripEndDate, pricePe
             required: {
               value: true,
               message: 'Número de hóspedes é obrigatório'
+            },
+            max: {
+              value: maxGuests,
+              message: `Número de hóspedes não pode ser maior que ${maxGuests}`
             }
           })}
           error={!!errors.guests}
           errorMessage={errors?.guests?.message}
           placeholder={`Número de hóspedes (máx: ${maxGuests})`} 
           className="mt-4" 
+          type="number"
         />
 
         <div className="flex justify-between mt-3">
