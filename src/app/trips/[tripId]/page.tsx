@@ -30,6 +30,7 @@ export default async function TripDetails ({ params }: { params: { tripId: strin
 
       {/* Reserva */}
       <TripReservation 
+        tripId={trip.id}
         maxGuests={trip.maxGuests} 
         tripStartDate={trip.startDate} 
         tripEndDate={trip.endDate}
