@@ -75,7 +75,7 @@ export async function POST(request: Request) {
     JSON.stringify({
       success: true,
       trip,
-      
+      totalPrice: differenceInDays(new Date(req.endDate), new Date(req.startDate)) * Number(trip.pricePerDay),
     })
   );
 }
