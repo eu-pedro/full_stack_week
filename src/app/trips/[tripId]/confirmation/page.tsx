@@ -32,9 +32,15 @@ export default function TripConfirmation({ params }: { params: { tripId: string}
         }),
       });
 
-      const { trip, totalPrice } = await response.json();
-      setTotalPrice(totalPrice)
-      setTrip(trip)
+
+      const res = await response.json()
+
+      if(res?.error){
+        return router.push('/')
+      }
+
+      setTotalPrice(res.totalPrice)
+      setTrip(res.trip)
     };
 
     if(status === 'unauthenticated') {
@@ -42,7 +48,7 @@ export default function TripConfirmation({ params }: { params: { tripId: string}
     }
 
     fetchTrip()
-  }, [status])
+  }, [status, searchParams, params.tripId, router]);
 
   const startDate = new Date(searchParams.get('startDate') as string)
   const endDate = new Date(searchParams.get('endDate') as string)
