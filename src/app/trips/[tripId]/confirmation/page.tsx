@@ -9,14 +9,17 @@ import ptBR from "date-fns/locale/pt-BR";
 import Button from "@/components/Button/Button";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 
 export default function TripConfirmation({ params }: { params: { tripId: string}}) {
   const [trip, setTrip] = useState<Trip | null>()  
   const [totalPrice, setTotalPrice] = useState<number>(0)
 
-  const { status } = useSession()
+  const { status , data } = useSession()
   const router = useRouter()
+
+  console.log(data)
   
   const searchParams = useSearchParams()
 
@@ -55,6 +58,28 @@ export default function TripConfirmation({ params }: { params: { tripId: string}
   const guests = searchParams.get('guests')
 
   if(!trip) return null
+
+  async function handleBuyClick() {
+    const res = await fetch('http://localhost:3000/api/trips/reservation', {
+      method: 'POST',
+      body: Buffer.from(JSON.stringify({
+        tripId: params.tripId,
+        startDate: searchParams.get('startDate'),
+        endDate: searchParams.get('endDate'),
+        guests: Number(searchParams.get('guests')),
+        userId: (data?.user as any)?.id!,
+        totalPaid: totalPrice
+      }))
+    });
+
+    if(!res.ok) {
+      return toast.error('Ocorreu um erro ao tentar cadastrar uma viagem!')
+    }
+
+    router.push('/')
+
+    toast.success('Reserva realizada com sucesso!', { position: 'bottom-center'})
+  }
 
   return (
     <div className="container mx-auto p-5 h-screen">
@@ -95,7 +120,7 @@ export default function TripConfirmation({ params }: { params: { tripId: string}
           <h3 className="text-primaryDarker font-semibold mt-5">Hóspedes</h3>
           <p className="text-primaryDarker font-normal text-sm">{guests} hóspedes</p>
 
-          <Button className="mt-5">Finalizar Compra</Button>
+          <Button className="mt-5" onClick={handleBuyClick}>Finalizar Compra</Button>
       </div>
 
     </div>
