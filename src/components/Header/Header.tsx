@@ -2,7 +2,7 @@
 import { signIn, useSession, signOut } from "next-auth/react"
 import Image from "next/image"
 import Link from "next/link"
-import { useCallback, useState } from "react"
+import { useState } from "react"
 import { AiOutlineMenu } from 'react-icons/ai'
 
 export function Header() {
@@ -49,7 +49,7 @@ export function Header() {
           <Image height={32} width={32} alt={data.user.name!} src={data.user.image!} className="rounded-full shadow-md"/>
           {menuIsOpen && (
             <div className="absolute top-12 left-0 w-full h-[100px] bg-white rounded-lg shadow-md flex flex-col justify-center items-center transition-all z-50">
-              <Link href="/my-trips">
+              <Link href="/my-trips" onClick={() => setMenuIsOPen(false)}>
                 <button 
                   className="text-primary text-sm font-semibold transition-all p-2 border-b border-grayLighter border-sold">
                     Minhas Viagens
