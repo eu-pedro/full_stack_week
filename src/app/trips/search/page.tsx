@@ -30,7 +30,7 @@ export default function Trips() {
 
   return (
     <div className="container mx-auto flex flex-col p-5 items-center">
-      <h1 className="primaryDarker font-semibold text-xl">Hospedagens Encontradas</h1>
+      <h1 className="primaryDarker font-semibold text-xl">{!!trips.length ? 'Hospedagens Encontradas' : 'Não encontramos nenhuma viagem! =('}</h1>
       <h2 className="text-grayPrimary font-medium mb-5">Listamos as melhores viagens para você!</h2>
 
       <div className="flex flex-col gap-4">

@@ -26,7 +26,7 @@ function generateSearchQuery(text: string, startDate?: string | null, budget?: s
     searchQuery = {
       ...searchQuery,
       AND: [
-        ...searchQuery.AND,
+        ...searchQuery?.AND,
         {
           startDate: {
             gte: startDate
@@ -36,11 +36,11 @@ function generateSearchQuery(text: string, startDate?: string | null, budget?: s
     }
   }
 
-  if(budget !== 'undefined' && budget !== null) {
+  if(budget !== 'undefined' && budget !== "null") {
     searchQuery = {
       ...searchQuery,
       AND: [
-        ...searchQuery.AND,
+        ...searchQuery?.AND,
         {
           pricePerDay: {
             lte: Number(budget)
