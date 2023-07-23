@@ -81,7 +81,7 @@ export function TripSearch() {
           />
         </div>
 
-        <Button onClick={() => handleSubmit(onSubmit)()}>Buscar</Button>
+        <Button className='w-1/2' onClick={() => handleSubmit(onSubmit)()}>Buscar</Button>
       </div>
     </div>
   )

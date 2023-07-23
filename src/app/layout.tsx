@@ -31,7 +31,7 @@ export default function RootLayout({
               <div className="h-[94px]">
                 <Header />
               </div>
-              <div className="flex flex-1">{children}</div>
+              <div className="flex flex-1 mx-auto">{children}</div>
               <Footer />
             </div>
           </ToastProvider>
