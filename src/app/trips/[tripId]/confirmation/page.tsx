@@ -95,7 +95,7 @@ export default function TripConfirmation({
   }
 
   return (
-    <div className="container mx-auto p-5 h-screen">
+    <div className="container mx-auto p-5 h-screen lg:max-w-[600px]">
       <h1 className="text-xl font-semibold text-primaryDarker">Sua viagem</h1>
       {/* CARD */}
       <div className="flex flex-col p-5 mt-5 border-solid border border-grayLighter rounded-lg shadow-md">
