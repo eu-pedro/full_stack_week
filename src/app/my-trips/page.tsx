@@ -31,7 +31,6 @@ export default function MyTrips() {
     fetchReservations()
   }, [status])
 
-  console.log({ reservations })
 
 
   return (

@@ -18,9 +18,7 @@ export default function Trips() {
     const fetchTrips = async () => {
       const response = await fetch(`/api/trips/search?text=${searchParams.get('text') ?? ""}&starDate=${searchParams.get('starDate')}&budget=${searchParams.get('budget')}`)
 
-      console.log(response)
       const data = await response.json();
-      console.log(data)
       setTrips(data)
     }
 

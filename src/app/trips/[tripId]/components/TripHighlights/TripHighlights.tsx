@@ -4,7 +4,6 @@ interface TripHighlightsProps {
   highlights: string[]
 }
 
-console.log('oi') 
 
 export function TripHighlights({ highlights }: TripHighlightsProps) {
   return (

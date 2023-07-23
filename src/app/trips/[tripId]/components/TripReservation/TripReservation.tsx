@@ -3,6 +3,7 @@ import Button from "@/components/Button/Button";
 import DatePicker from "@/components/DatePicker/DatePicker";
 import Input from "@/components/Input/Input";
 import { differenceInDays } from "date-fns";
+import { ptBR } from "date-fns/locale";
 import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 
@@ -44,7 +45,6 @@ export function TripReservation({ maxGuests, tripStartDate, tripEndDate, pricePe
     })
 
     const res = await response.json()
-    console.log({ res })
 
     if(res?.error?.code === 'TRIP_ALREADY_RESERVED'){
       setError('startDate', {
