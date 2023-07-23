@@ -1,7 +1,11 @@
-import { prisma } from "@/lib/prisma";
-import { NextResponse } from "next/server";
+import { prisma } from '@/lib/prisma'
+import { NextResponse } from 'next/server'
 
-function generateSearchQuery(text: string, startDate?: string | null, budget?: string | null) {
+function generateSearchQuery(
+  text: string,
+  startDate?: string | null,
+  budget?: string | null,
+) {
   let searchQuery: any = {
     OR: [
       {
@@ -11,16 +15,16 @@ function generateSearchQuery(text: string, startDate?: string | null, budget?: s
       },
       {
         description: {
-          search: text
-        }
+          search: text,
+        },
       },
       {
         location: {
-          search: text
-        }
-      }
+          search: text,
+        },
+      },
     ],
-    AND: []
+    AND: [],
   }
   if (startDate !== 'undefined' && startDate !== null) {
     searchQuery = {
@@ -29,53 +33,49 @@ function generateSearchQuery(text: string, startDate?: string | null, budget?: s
         ...searchQuery?.AND,
         {
           startDate: {
-            gte: startDate
-          }
-        }
-      ]
+            gte: startDate,
+          },
+        },
+      ],
     }
   }
 
-  if(budget !== 'undefined' && budget !== "null") {
+  if (budget !== 'undefined' && budget !== 'null') {
     searchQuery = {
       ...searchQuery,
       AND: [
         ...searchQuery?.AND,
         {
           pricePerDay: {
-            lte: Number(budget)
-          }
-        }
-      ]
+            lte: Number(budget),
+          },
+        },
+      ],
     }
   }
 
-  return searchQuery;
+  return searchQuery
 }
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
+  const { searchParams } = new URL(request.url)
 
   const text = searchParams.get('text')
   const startDate = searchParams.get('startDate')
   const budget = searchParams.get('budget')
 
-
   if (!text) {
     return new NextResponse(
       JSON.stringify({
-        message: 'Missing text parameter'
+        message: 'Missing text parameter',
       }),
-      { status: 404 }
+      { status: 404 },
     )
   }
 
   const trips = await prisma.trip.findMany({
-    where: generateSearchQuery(text,startDate, budget),
+    where: generateSearchQuery(text, startDate, budget),
   })
 
-
-
-
-  return new NextResponse(JSON.stringify(trips), { status: 200 });
+  return new NextResponse(JSON.stringify(trips), { status: 200 })
 }

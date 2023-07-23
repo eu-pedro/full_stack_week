@@ -1,27 +1,25 @@
-import { prisma } from "@/lib/prisma";
-import { NextResponse } from "next/server";
+import { prisma } from '@/lib/prisma'
+import { NextResponse } from 'next/server'
 
 export async function POST(request: Request) {
-  const req = await request.json();
-
+  const req = await request.json()
 
   const { startDate, endDate, userId, tripId, totalPaid, guests } = req
-
 
   const trip = await prisma.trip.findUnique({
     where: {
       id: tripId,
-    }
+    },
   })
 
-  if(!trip) {
+  if (!trip) {
     return new NextResponse(
       JSON.stringify({
         error: {
           code: 'TRIP_NOT_FOUND',
-        }
-      })
-    );
+        },
+      }),
+    )
   }
 
   await prisma.tripReservation.create({
@@ -31,12 +29,14 @@ export async function POST(request: Request) {
       endDate: new Date(endDate),
       userId,
       tripId,
-      guests
-    }
+      guests,
+    },
   })
 
-  return new NextResponse(JSON.stringify({
-    success: true,
-    }), {status: 201}
+  return new NextResponse(
+    JSON.stringify({
+      success: true,
+    }),
+    { status: 201 },
   )
 }

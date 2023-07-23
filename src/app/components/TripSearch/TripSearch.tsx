@@ -1,32 +1,36 @@
-"use client";
+'use client'
 
-import Button from "@/components/Button/Button";
-import CurrencyInput from "@/components/CurrencyInput/CurrencyInput";
-import DatePicker from "@/components/DatePicker/DatePicker";
-import Input from "@/components/Input/Input";
-import { useRouter } from "next/navigation";
-import React from "react";
-import { Controller, useForm } from "react-hook-form";
+import Button from '@/components/Button/Button'
+import CurrencyInput from '@/components/CurrencyInput/CurrencyInput'
+import DatePicker from '@/components/DatePicker/DatePicker'
+import Input from '@/components/Input/Input'
+import { useRouter } from 'next/navigation'
+import React from 'react'
+import { Controller, useForm } from 'react-hook-form'
 
 interface TripSearchForm {
-  text: string;
-  startDate: Date | null;
-  budget: string;
+  text: string
+  startDate: Date | null
+  budget: string
 }
 
 export function TripSearch() {
-  const router = useRouter();
+  const router = useRouter()
 
   const {
     control,
     formState: { errors },
     register,
     handleSubmit,
-  } = useForm<TripSearchForm>();
+  } = useForm<TripSearchForm>()
 
   const onSubmit = (data: TripSearchForm) => {
-    router.push(`/trips/search?text=${data.text}&startDate=${data.startDate?.toISOString()}&budget=${data.budget}`)
-  };
+    router.push(
+      `/trips/search?text=${
+        data.text
+      }&startDate=${data.startDate?.toISOString()}&budget=${data.budget}`,
+    )
+  }
 
   return (
     <div className="container mx-auto p-5 bg-search-background bg-cover bg-center bg-no-repeat lg:py-28">
@@ -39,10 +43,10 @@ export function TripSearch() {
           placeholder="Onde você quer ir?"
           error={!!errors.text}
           errorMessage={errors.text?.message}
-          {...register("text", {
+          {...register('text', {
             required: {
               value: true,
-              message: "Texto é obrigatório.",
+              message: 'Texto é obrigatório.',
             },
           })}
         />
@@ -52,7 +56,13 @@ export function TripSearch() {
             name="startDate"
             control={control}
             render={({ field }) => (
-              <DatePicker onChange={field.onChange} selected={field.value} placeholderText="Data Final" className="w-full" minDate={new Date()} />
+              <DatePicker
+                onChange={field.onChange}
+                selected={field.value}
+                placeholderText="Data Final"
+                className="w-full"
+                minDate={new Date()}
+              />
             )}
           />
 
@@ -71,12 +81,10 @@ export function TripSearch() {
           />
         </div>
 
-        <Button onClick={() => handleSubmit(onSubmit)()}>
-          Buscar
-        </Button>
+        <Button onClick={() => handleSubmit(onSubmit)()}>Buscar</Button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default TripSearch;
+export default TripSearch
