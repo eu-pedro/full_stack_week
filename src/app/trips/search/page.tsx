@@ -32,8 +32,8 @@ export default function Trips() {
   }, [searchParams])
 
   return (
-    <div className="container mx-auto flex flex-col p-5 items-center">
-      <h1 className="primaryDarker font-semibold text-xl">
+    <div className="container mx-auto flex flex-col p-5 items-center lg:text-[2.5rem] lg:items-start">
+      <h1 className="primaryDarker font-semibold text-xl lg:mt-6">
         {trips.length
           ? 'Hospedagens Encontradas'
           : 'Não encontramos nenhuma viagem! =('}
@@ -42,7 +42,7 @@ export default function Trips() {
         Listamos as melhores viagens para você!
       </h2>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 lg:grid lg:grid-cols-4 lg:gap-10 lg:mt-6 lg:w-full lg:text-left lg:pb-16">
         {trips.map((trip) => (
           <TripItem key={trip.id} trip={trip} />
         ))}
