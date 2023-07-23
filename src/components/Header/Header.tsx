@@ -23,7 +23,7 @@ export function Header() {
   }
 
   return (
-    <header className="container mx-auto p-5 h-[93px] flex justify-between items-center">
+    <header className="container mx-auto p-5 h-[93px] flex justify-between items-center lg:border-b lg:border-grayLighter">
       <Link href="/">
         <div className="relative w-[182px] h-[32px]">
           <Image src="/logo.svg" alt="Logo Header" fill />

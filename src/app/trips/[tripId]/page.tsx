@@ -27,7 +27,7 @@ export default async function TripDetails({
   if (!trip) return
 
   return (
-    <div className="container mx-auto lg:px-40">
+    <div className="container mx-auto lg:px-40 lg:pt-10">
       <TripHeader trip={trip} />
 
       {/* Reserva */}
