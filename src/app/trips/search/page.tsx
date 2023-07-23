@@ -29,7 +29,7 @@ export default function Trips() {
     }
 
     fetchTrips()
-  }, [])
+  }, [searchParams])
 
   return (
     <div className="container mx-auto flex flex-col p-5 items-center">

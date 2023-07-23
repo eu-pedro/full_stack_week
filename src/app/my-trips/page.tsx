@@ -31,7 +31,7 @@ export default function MyTrips() {
       setReservations(json)
     }
     fetchReservations()
-  }, [status])
+  }, [status, data?.user, router])
 
   return (
     <div className="contaner mx-auto p-5">
